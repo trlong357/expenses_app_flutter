@@ -24,6 +24,37 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSwatch(primarySwatch: Colors.cyan).copyWith(
           secondary: Colors.amber,
         ),
+
+        //fonts
+        fontFamily: 'Quicksand',
+
+        textTheme: const TextTheme(
+            headline6: TextStyle(
+          fontFamily: 'Opensans',
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        )),
+        //appbar
+        appBarTheme: AppBarTheme(
+          titleTextStyle: ThemeData.light()
+              .textTheme
+              .copyWith(
+                headline6: const TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+              .headline6,
+
+          //
+          //textTheme: ThemeData.light().textTheme.copyWith(
+          //   headline6: TextStyle(
+          //     fontFamily: 'OpenSans',
+          //     fontSize: 20,
+          //   ),
+          // ),
+        ),
       ),
       home: MyHomePage(),
     );

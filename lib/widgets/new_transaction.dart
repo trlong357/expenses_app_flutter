@@ -28,7 +28,7 @@ class _NewTransactionState extends State<NewTransaction> {
       enteredAmount,
     );
 
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(); // close when submit
   }
 
   @override
