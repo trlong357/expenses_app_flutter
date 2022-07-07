@@ -47,7 +47,7 @@ class MyHomePage extends StatelessWidget {
         title: Text("Expense app"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -56,6 +56,32 @@ class MyHomePage extends StatelessWidget {
               color: Colors.blue,
               child: Text("CHART!"),
               elevation: 5,
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: "Title"),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Amount"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      print("pressed");
+                    },
+                    child: Text(
+                      "Add Transaction",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Column(
