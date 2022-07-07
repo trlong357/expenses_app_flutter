@@ -25,16 +25,16 @@ class TransactionList extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 2,
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     '\$ ${userTransaction[index].amount.toStringAsFixed(2)}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 19,
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColorDark,
                     ),
                   ),
                 ),

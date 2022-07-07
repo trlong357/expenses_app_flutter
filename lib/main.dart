@@ -13,7 +13,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(),
+      theme: ThemeData(
+        // primarySwatch: Colors.cyan,
+
+        // colorScheme: ColorScheme.light(Colors.amber),
+        //accentColor: Colors.amber, // no logger needed
+
+        //https://api.flutter.dev/flutter/material/ThemeData-class.html
+        colorScheme:
+            ColorScheme.fromSwatch(primarySwatch: Colors.cyan).copyWith(
+          secondary: Colors.amber,
+        ),
+      ),
       home: MyHomePage(),
     );
   }
