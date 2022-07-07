@@ -1,6 +1,5 @@
+import 'package:expenses_app/widgets/user_transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import './transaction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,32 +18,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: "t1",
-      title: "New Shoes",
-      amount: 99.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t2",
-      title: "Nike Shirt",
-      amount: 29.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t3",
-      title: "Apple Watch",
-      amount: 299.99,
-      date: DateTime.now(),
-    ),
-  ];
+  MyHomePage({Key? key}) : super(key: key);
+  // String? amountInput;
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Expense app"),
+        title: const Text("Expense app"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -52,88 +36,13 @@ class MyHomePage extends StatelessWidget {
         children: <Widget>[
           Container(
             width: double.infinity,
-            child: Card(
+            child: const Card(
               color: Colors.blue,
-              child: Text("CHART!"),
               elevation: 5,
+              child: Text("CHART!"),
             ),
           ),
-          Card(
-            elevation: 5,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(labelText: "Title"),
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: "Amount"),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      print("pressed");
-                    },
-                    child: Text(
-                      "Add Transaction",
-                      style: TextStyle(color: Colors.purple),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Column(
-              children: transactions.map((tx) {
-            return Card(
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: 120,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 15,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 2,
-                        color: Colors.purple,
-                      ),
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      '\$ ${tx.amount}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19,
-                        color: Colors.purple,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        tx.title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        DateFormat.yMMMd().format(tx.date),
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            );
-          }).toList()),
+          const UserTransactions(),
         ],
       ),
     );
