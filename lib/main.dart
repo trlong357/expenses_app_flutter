@@ -21,8 +21,10 @@ class MyApp extends StatelessWidget {
         //accentColor: Colors.amber, // no logger needed
 
         //https://api.flutter.dev/flutter/material/ThemeData-class.html
-        colorScheme:
-            ColorScheme.fromSwatch(primarySwatch: Colors.cyan).copyWith(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.cyan,
+          // primaryColorDark: Colors.cyan,
+        ).copyWith(
           secondary: Colors.amber,
         ),
 
@@ -30,11 +32,13 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Quicksand',
 
         textTheme: const TextTheme(
-            headline6: TextStyle(
-          fontFamily: 'Opensans',
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        )),
+          headline6: TextStyle(
+            fontFamily: 'Opensans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
         //appbar
         appBarTheme: AppBarTheme(
           titleTextStyle: ThemeData.light()
