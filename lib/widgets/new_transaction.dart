@@ -23,12 +23,13 @@ class _NewTransactionState extends State<NewTransaction> {
       return;
     }
     final enteredAmount = double.parse(_amountController.text);
-    if (enteredAmount <= 0) {
+    if (enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      _selectedDate,
     );
 
     Navigator.of(context).pop(); // close when submit
@@ -38,8 +39,8 @@ class _NewTransactionState extends State<NewTransaction> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2023, 12, 31), // 31-12-2023
+      firstDate: DateTime(2021, 01, 01),
+      lastDate: DateTime.now(), // 31-12-2023
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
