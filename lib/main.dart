@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -132,32 +132,45 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        //return GestureDetector(
-        // onTap: null,
-        //child: NewTransaction(_addNewTransaction),
-        // behavior: HitTestBehavior.opaque,
-        //); // sau nay ko can nua
         return NewTransaction(_addNewTransaction);
       },
     );
   }
 
+  createAppBar() {
+    return AppBar(
+      title: const Text("Expense app"),
+      actions: <Widget>[
+        IconButton(
+          onPressed: () => _startAddNewTransaction,
+          icon: const Icon(Icons.add),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final appBar = createAppBar();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Expense app"),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => _startAddNewTransaction(context),
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      ),
+      appBar: createAppBar(),
       body: ListView(
         children: <Widget>[
-          Chart(_recentTransactions),
-          TransactionList(_userTransaction, _deleteTransaction),
+          Container(
+            height: (MediaQuery.of(context).size.height -
+                    appBar.preferredSize.height -
+                    MediaQuery.of(context).padding.top) *
+                0.4,
+            child: Chart(_recentTransactions),
+          ),
+          Container(
+            height: (MediaQuery.of(context).size.height -
+                    appBar.preferredSize.height -
+                    MediaQuery.of(context).padding.top) *
+                0.6,
+            child: TransactionList(_userTransaction, _deleteTransaction),
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
