@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expenses_app/widgets/chart.dart';
 import 'package:expenses_app/widgets/new_transaction.dart';
 import 'package:expenses_app/widgets/transaction_list.dart';
@@ -138,7 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
       title: const Text("Expense app"),
       actions: <Widget>[
         IconButton(
-          onPressed: () => _startAddNewTransaction,
+          onPressed: () => _startAddNewTransaction(
+              context), // ---QUESTION: context được lấy ở đâu?
           icon: const Icon(Icons.add),
         ),
       ],
@@ -199,10 +202,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _startAddNewTransaction(context),
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              onPressed: () => _startAddNewTransaction(context),
+              child: const Icon(Icons.add),
+            ),
     );
   }
 }
