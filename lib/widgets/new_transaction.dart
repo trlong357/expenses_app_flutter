@@ -18,6 +18,25 @@ class _NewTransactionState extends State<NewTransaction> {
 
   DateTime? _selectedDate;
 
+  // @override
+  // void didUpdateWidget(covariant NewTransaction oldWidget) {
+  //   print("didUpdateWidget");
+  //   super.didUpdateWidget(oldWidget);
+  // }
+
+  // @override
+  // void initState() {
+  //   _selectedDate = DateTime.now();
+  //   print("init state");
+  //   super.initState();
+  // }
+
+  // @override
+  // void dispose() {
+  //   print("DISPOSED");
+  //   super.dispose();
+  // }
+
   void _submitData() {
     final enteredTitle = _titleController.text;
     if (_amountController.text.isEmpty || enteredTitle.isEmpty) {
