@@ -197,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandScape = mediaQuery.orientation == Orientation.landscape;
-    final PreferredSizeWidget appBar = Platform.isIOS
+    final appBar = Platform.isIOS
         ? CupertinoNavigationBar(
             middle: const Text(
               'Expense App',
@@ -235,11 +235,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Platform.isIOS
         ? CupertinoPageScaffold(
+            navigationBar: appBar,
             child: pageBody,
-            navigationBar: createAppBar(),
           )
         : Scaffold(
-            appBar: createAppBar(),
+            appBar: appBar,
             body: pageBody,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
