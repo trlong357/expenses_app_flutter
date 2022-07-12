@@ -5,7 +5,7 @@ import 'package:expenses_app/widgets/new_transaction.dart';
 import 'package:expenses_app/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'models/transaction.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -197,7 +197,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandScape = mediaQuery.orientation == Orientation.landscape;
-    final appBar = createAppBar();
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: const Text(
+              'Expense App',
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                GestureDetector(
+                  child: const Icon(CupertinoIcons.add),
+                  onTap: () => _startAddNewTransaction(context),
+                ),
+              ],
+            ),
+          )
+        : createAppBar();
 
     final txListWidget = Container(
       height: (mediaQuery.size.height -
@@ -207,9 +222,8 @@ class _MyHomePageState extends State<MyHomePage> {
       child: TransactionList(_userTransaction, _deleteTransaction),
     );
 
-    return Scaffold(
-      appBar: createAppBar(),
-      body: ListView(
+    final pageBody = SafeArea(
+      child: ListView(
         children: <Widget>[
           if (isLandScape)
             ..._buildLandscapeContent(mediaQuery, appBar, txListWidget),
@@ -217,13 +231,24 @@ class _MyHomePageState extends State<MyHomePage> {
             ..._buildPortraitContent(mediaQuery, appBar, txListWidget),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
-              onPressed: () => _startAddNewTransaction(context),
-              child: const Icon(Icons.add),
-            ),
     );
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            child: pageBody,
+            navigationBar: createAppBar(),
+          )
+        : Scaffold(
+            appBar: createAppBar(),
+            body: pageBody,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    onPressed: () => _startAddNewTransaction(context),
+                    child: const Icon(Icons.add),
+                  ),
+          );
   }
 }
