@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
 
         //fonts
         fontFamily: 'Quicksand',
-
         textTheme: const TextTheme(
           headline6: TextStyle(
             fontFamily: 'Opensans',
@@ -68,7 +67,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _userTransaction = [
     // Transaction(
     //   id: "t1",
@@ -91,6 +90,30 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   bool _showChart = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    print("add observer");
+    super.initState();
+  }
+
+  @override
+  didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      print("App in background mode");
+    }
+    if (state == AppLifecycleState.resumed) {
+      print("App in Foreground mode");
+    }
+  }
+
+  @override
+  dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    print("remove observer");
+    super.dispose();
+  }
 
   List<Transaction> get _recentTransactions {
     return _userTransaction.where(
