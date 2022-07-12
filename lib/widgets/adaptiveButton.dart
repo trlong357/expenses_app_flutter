@@ -4,7 +4,7 @@ import 'dart:io';
 
 class AdaptiveButton extends StatelessWidget {
   final String text;
-  final Function handler;
+  final VoidCallback handler;
 
   const AdaptiveButton(this.text, this.handler, {super.key});
 
@@ -12,14 +12,14 @@ class AdaptiveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Platform.isIOS
         ? CupertinoButton(
-            onPressed: () => handler,
+            onPressed: handler,
             child: Text(
               text,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           )
         : TextButton(
-            onPressed: () => handler,
+            onPressed: handler,
             child: Text(
               text,
               style: const TextStyle(fontWeight: FontWeight.bold),
