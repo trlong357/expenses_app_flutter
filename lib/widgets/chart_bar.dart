@@ -19,7 +19,7 @@ class ChartBar extends StatelessWidget {
             child: Text('\$${spendingAmount.toStringAsFixed(0)}'),
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Container(
           height: 60,
           width: 10,
@@ -28,7 +28,7 @@ class ChartBar extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey, width: 1.0),
-                  color: Color.fromARGB(255, 233, 233, 233),
+                  color: const Color.fromARGB(255, 233, 233, 233),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -44,7 +44,7 @@ class ChartBar extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 4,
         ),
         Text(label),
